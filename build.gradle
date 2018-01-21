@@ -10,8 +10,6 @@ buildscript {
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.2.0'
-        
-
     }
 }
 
@@ -45,7 +43,9 @@ project(":desktop") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        
+        // https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-tools
+        compile group: 'com.badlogicgames.gdx', name: 'gdx-tools', version: '1.9.8'
+
     }
 }
 
