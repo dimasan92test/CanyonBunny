@@ -1,5 +1,9 @@
 package ru.spb.exclusive.canyonbunny.game;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -67,6 +71,7 @@ public class WorldController {
     }
 
     public void update(float deltaTime){
+        handleDebugInput(deltaTime);
         updateTestObjects(deltaTime);
     }
 
@@ -79,5 +84,20 @@ public class WorldController {
         rotation %= 360;
         // Set new rotation value to selected sprite
         testSprites[selectedSprite].setRotation(rotation);
+    }
+
+    private void handleDebugInput (float deltaTime) {
+        if (Gdx.app.getType() != ApplicationType.Desktop) return;
+
+        // Selected Sprite Controls
+        float sprMoveSpeed = 5 * deltaTime;
+        if (Gdx.input.isKeyPressed(Keys.A)) moveSelectedSprite(-sprMoveSpeed, 0);
+        if (Gdx.input.isKeyPressed(Keys.D)) moveSelectedSprite(sprMoveSpeed, 0);
+        if (Gdx.input.isKeyPressed(Keys.W)) moveSelectedSprite(0, sprMoveSpeed);
+        if (Gdx.input.isKeyPressed(Keys.S)) moveSelectedSprite(0, -sprMoveSpeed);
+    }
+
+    private void moveSelectedSprite (float x, float y) {
+        testSprites[selectedSprite].translate(x, y);
     }
 }
