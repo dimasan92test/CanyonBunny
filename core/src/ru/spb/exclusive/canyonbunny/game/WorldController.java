@@ -102,4 +102,19 @@ public class WorldController extends InputAdapter {
     private void moveSelectedSprite (float x, float y) {
         testSprites[selectedSprite].translate(x, y);
     }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        // Reset game world
+        if (keycode == Keys.R) {
+            init();
+            Gdx.app.debug(TAG, "Game world resetted");
+        }
+        // Select next sprite
+        else if (keycode == Keys.SPACE) {
+            selectedSprite = (selectedSprite + 1) % testSprites.length;
+            Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
+        }
+        return  false;
+    }
 }
