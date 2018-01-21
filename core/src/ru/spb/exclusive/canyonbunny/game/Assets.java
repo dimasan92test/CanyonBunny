@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.Disposable;
 
 import ru.spb.exclusive.canyonbunny.util.Constants;
@@ -18,6 +19,58 @@ public class Assets implements Disposable, AssetErrorListener {
 
     // singleton: prevent instantiation from other classes
     private Assets () {
+    }
+
+    public class AssetBunny {
+        public final AtlasRegion head;
+
+        public AssetBunny (TextureAtlas atlas) {
+            head = atlas.findRegion("bunny_head");
+        }
+    }
+
+    public class AssetRock {
+        public final AtlasRegion edge;
+        public final AtlasRegion middle;
+
+        public AssetRock (TextureAtlas atlas) {
+            edge = atlas.findRegion("rock_edge");
+            middle = atlas.findRegion("rock_middle");
+        }
+    }
+
+    public class AssetGoldCoin {
+        public final AtlasRegion goldCoin;
+
+        public AssetGoldCoin (TextureAtlas atlas) {
+            goldCoin = atlas.findRegion("item_gold_coin");
+        }
+    }
+
+    public class AssetFeather {
+        public final AtlasRegion feather;
+
+        public AssetFeather (TextureAtlas atlas) {
+            feather = atlas.findRegion("item_feather");
+        }
+    }
+
+    public class AssetLevelDecoration {
+        public final AtlasRegion cloud01;
+        public final AtlasRegion cloud02;
+        public final AtlasRegion cloud03;
+        public final AtlasRegion mountainLeft;
+        public final AtlasRegion mountainRight;
+        public final AtlasRegion waterOverlay;
+
+        public AssetLevelDecoration (TextureAtlas atlas) {
+            cloud01 = atlas.findRegion("cloud01");
+            cloud02 = atlas.findRegion("cloud02");
+            cloud03 = atlas.findRegion("cloud03");
+            mountainLeft = atlas.findRegion("mountain_left");
+            mountainRight = atlas.findRegion("mountain_right");
+            waterOverlay = atlas.findRegion("water_overlay");
+        }
     }
 
     public void init (AssetManager assetManager) {
