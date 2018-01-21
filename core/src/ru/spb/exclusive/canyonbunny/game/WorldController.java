@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import ru.spb.exclusive.canyonbunny.util.CameraHelper;
 
-public class WorldController {
+public class WorldController extends InputAdapter {
     private static final String TAG = WorldController.class.getName();
 
     public Sprite[] testSprites;
@@ -25,6 +26,7 @@ public class WorldController {
     }
 
     private void init(){
+        Gdx.input.setInputProcessor(this);
         initTestObjects();
     }
 
