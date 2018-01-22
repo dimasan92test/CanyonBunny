@@ -44,9 +44,6 @@ public class Rock extends AbstractGameObject {
         // Draw left edge
         reg = regEdge;
         relX -= dimension.x / 4;
-        // Draw left edge
-        reg = regEdge;
-        relX -= dimension.x / 4;
         batch.draw(reg.getTexture(), position.x + relX, position.y + relY, origin.x, origin.y, dimension.x / 4, dimension.y,
                 scale.x, scale.y, rotation, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false,
                 false);
