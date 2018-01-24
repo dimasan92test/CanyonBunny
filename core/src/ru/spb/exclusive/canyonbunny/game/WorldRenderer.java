@@ -3,8 +3,8 @@ package ru.spb.exclusive.canyonbunny.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 
 import ru.spb.exclusive.canyonbunny.util.Constants;
@@ -55,6 +55,8 @@ public class WorldRenderer implements Disposable {
         renderGuiExtraLive(batch);
         // draw FPS text (anchored to bottom right edge)
         renderGuiFpsCounter(batch);
+        // draw game over text
+        renderGuiGameOverMessage(batch);
 
         batch.end();
     }
@@ -94,6 +96,17 @@ public class WorldRenderer implements Disposable {
 
         fpsFont.draw(batch, "FPS: " + fps, x, y);
         fpsFont.setColor(1, 1, 1, 1); // white
+    }
+
+    private void renderGuiGameOverMessage (SpriteBatch batch) {
+        float x = cameraGUI.viewportWidth / 2;
+        float y = cameraGUI.viewportHeight / 2;
+        if (worldController.isGameOver()) {
+            BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
+            fontGameOver.setColor(1, 0.75f, 0.25f, 1);
+            fontGameOver.draw(batch, "GAME OVER", x, y, 1, Align.center,true);
+            fontGameOver.setColor(1, 1, 1, 1);
+        }
     }
 
     public void resize(int width, int height){
