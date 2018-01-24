@@ -51,6 +51,8 @@ public class WorldRenderer implements Disposable {
 
         // draw collected gold coins icon + text (anchored to top left edge)
         renderGuiScore(batch);
+        // draw collected feather icon (anchored to top left edge)
+        renderGuiFeatherPowerup(batch);
         // draw extra lives icon + text (anchored to top right edge)
         renderGuiExtraLive(batch);
         // draw FPS text (anchored to bottom right edge)
@@ -66,6 +68,25 @@ public class WorldRenderer implements Disposable {
         float y = -15;
         batch.draw(Assets.instance.goldCoin.goldCoin, x, y, 50, 50, 100, 100, 0.35f, -0.35f, 0);
         Assets.instance.fonts.defaultBig.draw(batch, "" + worldController.score, x + 75, y + 37);
+    }
+
+    private void renderGuiFeatherPowerup (SpriteBatch batch) {
+        float x = -15;
+        float y = 30;
+        float timeLeftFeatherPowerup = worldController.level.bunnyHead.timeLeftFeatherPowerup;
+        if (timeLeftFeatherPowerup > 0) {
+            // Start icon fade in/out if the left power-up time
+            // is less than 4 seconds. The fade interval is set
+            // to 5 changes per second.
+            if (timeLeftFeatherPowerup < 4) {
+                if (((int)(timeLeftFeatherPowerup * 5) % 2) != 0) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                }
+            }
+            batch.draw(Assets.instance.feather.feather, x, y, 50, 50, 100, 100, 0.35f, -0.35f, 0);
+            batch.setColor(1, 1, 1, 1);
+            Assets.instance.fonts.defaultSmall.draw(batch, "" + (int)timeLeftFeatherPowerup, x + 60, y + 57);
+        }
     }
 
     private void renderGuiExtraLive (SpriteBatch batch) {
