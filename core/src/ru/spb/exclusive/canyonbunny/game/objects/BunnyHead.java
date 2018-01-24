@@ -31,7 +31,7 @@ public class BunnyHead extends AbstractGameObject {
     public boolean hasFeatherPowerup;
     public float timeLeftFeatherPowerup;
 
-    public void BunnyHead() {
+    public BunnyHead() {
         init();
     }
 
