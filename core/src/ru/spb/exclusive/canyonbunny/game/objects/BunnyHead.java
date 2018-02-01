@@ -110,7 +110,7 @@ public class BunnyHead extends AbstractGameObject {
 
         // Set special color when game object has a feather power-up
         if (hasFeatherPowerup) {
-            batch.setColor(1.0f, 0.8f, 0.0f, 1.0f);
+            batch.setColor(0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         // Draw image
