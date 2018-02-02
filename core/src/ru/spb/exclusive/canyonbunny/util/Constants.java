@@ -33,4 +33,7 @@ public class Constants {
 
     // Delay after game over
     public static final float TIME_DELAY_GAME_OVER = 3;
+
+    // Game preferences file
+    public static final String PREFERENCES = "canyonbunny.prefs";
 }
