@@ -75,6 +75,8 @@ public class WorldController extends InputAdapter {
             else
                 initLevel();
         }
+        level.mountains.updateScrollPosition
+                (cameraHelper.getPosition());
     }
 
     public boolean isGameOver() {
@@ -226,7 +228,7 @@ public class WorldController extends InputAdapter {
         return false;
     }
 
-    private void backToMenu () {
+    private void backToMenu() {
         // switch to menu screen
         game.setScreen(new MenuScreen(game));
     }
