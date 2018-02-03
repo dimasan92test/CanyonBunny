@@ -1,14 +1,14 @@
 package ru.spb.exclusive.canyonbunny;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 
 import ru.spb.exclusive.canyonbunny.game.Assets;
+import ru.spb.exclusive.canyonbunny.screens.DirectedGame;
 import ru.spb.exclusive.canyonbunny.screens.MenuScreen;
 
-public class CanyonBunnyMain extends Game {
+public class CanyonBunnyMain extends DirectedGame {
     private static final String TAG = CanyonBunnyMain.class.getName();
 
     @Override

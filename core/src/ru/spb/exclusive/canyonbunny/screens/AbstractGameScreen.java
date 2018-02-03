@@ -1,18 +1,21 @@
 package ru.spb.exclusive.canyonbunny.screens;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 
 import ru.spb.exclusive.canyonbunny.game.Assets;
 
-public class AbstractGameScreen implements Screen {
+public abstract class AbstractGameScreen implements Screen {
 
-    protected Game game;
+    protected DirectedGame game;
 
-    public AbstractGameScreen(Game game) {
+    public AbstractGameScreen (DirectedGame game) {
         this.game = game;
     }
+
+    public abstract InputProcessor getInputProcessor ();
 
     @Override
     public void render(float delta) {

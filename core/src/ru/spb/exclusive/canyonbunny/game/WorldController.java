@@ -5,19 +5,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 
 import ru.spb.exclusive.canyonbunny.game.objects.BunnyHead;
 import ru.spb.exclusive.canyonbunny.game.objects.Feather;
 import ru.spb.exclusive.canyonbunny.game.objects.GoldCoin;
 import ru.spb.exclusive.canyonbunny.game.objects.Rock;
+import ru.spb.exclusive.canyonbunny.screens.DirectedGame;
 import ru.spb.exclusive.canyonbunny.screens.MenuScreen;
 import ru.spb.exclusive.canyonbunny.util.CameraHelper;
 import ru.spb.exclusive.canyonbunny.util.Constants;
@@ -25,7 +19,7 @@ import ru.spb.exclusive.canyonbunny.util.Constants;
 public class WorldController extends InputAdapter {
     private static final String TAG = WorldController.class.getName();
 
-    private Game game;
+    private DirectedGame game;
     public Level level;
     public int lives;
     public float livesVisual;
@@ -40,13 +34,12 @@ public class WorldController extends InputAdapter {
 
     private float timeLeftGameOverDelay;
 
-    public WorldController(Game game) {
+    public WorldController(DirectedGame game) {
         this.game = game;
         init();
     }
 
     private void init() {
-        Gdx.input.setInputProcessor(this);
         cameraHelper = new CameraHelper();
         lives = Constants.LIVES_START;
         livesVisual = lives;

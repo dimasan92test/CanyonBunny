@@ -1,7 +1,7 @@
 package ru.spb.exclusive.canyonbunny.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 
 import ru.spb.exclusive.canyonbunny.game.WorldController;
@@ -16,7 +16,7 @@ public class GameScreen extends AbstractGameScreen {
 
     private boolean paused;
 
-    public GameScreen(Game game) {
+    public GameScreen(DirectedGame game) {
         super(game);
     }
 
@@ -65,5 +65,10 @@ public class GameScreen extends AbstractGameScreen {
         super.resume();
         // Only called on Android!
         paused = false;
+    }
+
+    @Override
+    public InputProcessor getInputProcessor () {
+        return worldController;
     }
 }
