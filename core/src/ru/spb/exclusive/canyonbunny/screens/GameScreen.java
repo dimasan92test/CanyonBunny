@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 
 import ru.spb.exclusive.canyonbunny.game.WorldController;
 import ru.spb.exclusive.canyonbunny.game.WorldRenderer;
+import ru.spb.exclusive.canyonbunny.util.GamePreferences;
 
 public class GameScreen extends AbstractGameScreen {
     private static final String TAG = GameScreen.class.getName();
@@ -42,7 +43,7 @@ public class GameScreen extends AbstractGameScreen {
 
     @Override
     public void show() {
-//        GamePreferences.instance.load();
+        GamePreferences.instance.load();
         worldController = new WorldController(game);
         worldRenderer = new WorldRenderer(worldController);
         Gdx.input.setCatchBackKey(true);
