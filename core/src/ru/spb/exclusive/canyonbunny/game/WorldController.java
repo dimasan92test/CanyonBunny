@@ -30,6 +30,7 @@ public class WorldController extends InputAdapter {
     public int lives;
     public float livesVisual;
     public int score;
+    public float scoreVisual;
 
     public CameraHelper cameraHelper;
 
@@ -55,6 +56,7 @@ public class WorldController extends InputAdapter {
 
     private void initLevel() {
         score = 0;
+        scoreVisual = score;
         level = new Level(Constants.LEVEL_01);
         cameraHelper.setTarget(level.bunnyHead);
     }
@@ -79,8 +81,10 @@ public class WorldController extends InputAdapter {
         }
         level.mountains.updateScrollPosition
                 (cameraHelper.getPosition());
-        if (livesVisual> lives)
+        if (livesVisual > lives)
             livesVisual = Math.max(lives, livesVisual - 1 * deltaTime);
+        if (scoreVisual < score)
+            scoreVisual = Math.min(score, scoreVisual + 250 * deltaTime);
     }
 
     public boolean isGameOver() {
