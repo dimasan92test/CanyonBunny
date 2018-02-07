@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import ru.spb.exclusive.canyonbunny.game.Assets;
 import ru.spb.exclusive.canyonbunny.screens.transitions.ScreenTransition;
 import ru.spb.exclusive.canyonbunny.screens.transitions.ScreenTransitionFade;
+import ru.spb.exclusive.canyonbunny.util.AudioManager;
 import ru.spb.exclusive.canyonbunny.util.CharacterSkin;
 import ru.spb.exclusive.canyonbunny.util.Constants;
 import ru.spb.exclusive.canyonbunny.util.GamePreferences;
@@ -345,12 +346,14 @@ public class MenuScreen extends AbstractGameScreen {
     private void onSaveClicked() {
         saveSettings();
         onCancelClicked();
+        AudioManager.instance.onSettingsUpdated();
     }
 
     private void onCancelClicked() {
         btnMenuPlay.setVisible(true);
         btnMenuOptions.setVisible(true);
         winOptions.setVisible(false);
+        AudioManager.instance.onSettingsUpdated();
     }
 
     private void onCharSkinSelected(int index) {
