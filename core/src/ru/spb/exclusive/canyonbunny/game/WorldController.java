@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.spb.exclusive.canyonbunny.game.objects.BunnyHead;
@@ -13,6 +14,8 @@ import ru.spb.exclusive.canyonbunny.game.objects.GoldCoin;
 import ru.spb.exclusive.canyonbunny.game.objects.Rock;
 import ru.spb.exclusive.canyonbunny.screens.DirectedGame;
 import ru.spb.exclusive.canyonbunny.screens.MenuScreen;
+import ru.spb.exclusive.canyonbunny.screens.transitions.ScreenTransition;
+import ru.spb.exclusive.canyonbunny.screens.transitions.ScreenTransitionSlide;
 import ru.spb.exclusive.canyonbunny.util.CameraHelper;
 import ru.spb.exclusive.canyonbunny.util.Constants;
 
@@ -231,6 +234,8 @@ public class WorldController extends InputAdapter {
 
     private void backToMenu() {
         // switch to menu screen
-        game.setScreen(new MenuScreen(game));
+        ScreenTransition transition = ScreenTransitionSlide.init(0.75f,
+                ScreenTransitionSlide.DOWN, false, Interpolation.bounceOut);
+        game.setScreen(new MenuScreen(game), transition);
     }
 }
