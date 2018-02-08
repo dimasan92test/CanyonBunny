@@ -1,12 +1,19 @@
 package ru.spb.exclusive.canyonbunny.game;
 
 import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 
 import ru.spb.exclusive.canyonbunny.game.objects.BunnyHead;
 import ru.spb.exclusive.canyonbunny.game.objects.Feather;
@@ -20,7 +27,7 @@ import ru.spb.exclusive.canyonbunny.util.AudioManager;
 import ru.spb.exclusive.canyonbunny.util.CameraHelper;
 import ru.spb.exclusive.canyonbunny.util.Constants;
 
-public class WorldController extends InputAdapter {
+public class WorldController extends InputAdapter implements Disposable {
     private static final String TAG = WorldController.class.getName();
 
     private DirectedGame game;
@@ -29,6 +36,7 @@ public class WorldController extends InputAdapter {
     public float livesVisual;
     public int score;
     public float scoreVisual;
+    private boolean goalReached;
 
     public CameraHelper cameraHelper;
 
@@ -37,6 +45,8 @@ public class WorldController extends InputAdapter {
     private Rectangle r2 = new Rectangle();
 
     private float timeLeftGameOverDelay;
+
+    public World b2world;
 
     public WorldController(DirectedGame game) {
         this.game = game;
@@ -56,6 +66,29 @@ public class WorldController extends InputAdapter {
         scoreVisual = score;
         level = new Level(Constants.LEVEL_01);
         cameraHelper.setTarget(level.bunnyHead);
+        initPhysics();
+    }
+
+    private void initPhysics() {
+        if (b2world != null) b2world.dispose();
+        b2world = new World(new Vector2(0, -9.81f), true);
+        // Rocks
+        Vector2 origin = new Vector2();
+        for (Rock rock : level.rocks) {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyType.KinematicBody;
+            bodyDef.position.set(rock.position);
+            Body body = b2world.createBody(bodyDef);
+            rock.body = body;
+            PolygonShape polygonShape = new PolygonShape();
+            origin.x = rock.bounds.width / 2.0f;
+            origin.y = rock.bounds.height / 2.0f;
+            polygonShape.setAsBox(rock.bounds.width / 2.0f, rock.bounds.height / 2.0f, origin, 0);
+            FixtureDef fixtureDef = new FixtureDef();
+            fixtureDef.shape = polygonShape;
+            body.createFixture(fixtureDef);
+            polygonShape.dispose();
+        }
     }
 
     public void update(float deltaTime) {
@@ -241,5 +274,10 @@ public class WorldController extends InputAdapter {
         ScreenTransition transition = ScreenTransitionSlide.init(0.75f,
                 ScreenTransitionSlide.DOWN, false, Interpolation.bounceOut);
         game.setScreen(new MenuScreen(game), transition);
+    }
+
+    @Override
+    public void dispose() {
+        if (b2world != null) b2world.dispose();
     }
 }
