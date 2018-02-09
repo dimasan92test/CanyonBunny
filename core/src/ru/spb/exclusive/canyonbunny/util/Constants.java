@@ -25,8 +25,17 @@ public class Constants {
     // Location of image file for level 01
     public static final String LEVEL_01 = "levels/level-01.png";
 
+    // Number of carrots to spawn
+    public static final int CARROTS_SPAWN_MAX = 100;
+
+    // Spawn radius for carrots
+    public static final float CARROTS_SPAWN_RADIUS = 3.5f;
+
     // Amount of extra lives at level start
     public static final int LIVES_START = 3;
+
+    // Delay after game finished
+    public static final float TIME_DELAY_GAME_FINISHED = 6;
 
     // Duration of feather power-up in seconds
     public static final float ITEM_FEATHER_POWERUP_DURATION = 9;
