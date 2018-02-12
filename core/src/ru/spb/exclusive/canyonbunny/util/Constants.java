@@ -45,4 +45,10 @@ public class Constants {
 
     // Game preferences file
     public static final String PREFERENCES = "canyonbunny.prefs";
+
+    // Shader
+    public static final String shaderMonochromeVertex =
+            "shaders/monochrome.vs";
+    public static final String shaderMonochromeFragment =
+            "shaders/monochrome.fs";
 }
